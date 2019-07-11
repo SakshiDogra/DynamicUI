@@ -1,0 +1,39 @@
+<div class="page-header header-border">
+  <h4>{{configDetails?.viewDetails?.configName}}</h4>
+</div>
+<form [formGroup]="formGroup">
+  <div class="row">
+    <div class="col-md-6 form-group">
+      <label for="exampleSelect1">Apps</label>
+      <select class="form-control" formControlName="app" id="exampleSelect1">
+        <option value="">Select</option>
+        <option *ngFor="let app of appsList" [value]="app.code">{{app.value}}</option>
+      </select>
+    </div>
+    <div class="col-md-6 form-group">
+      <label for="exampleSelect1">Role</label>
+      <select class="form-control" formControlName="role" id="exampleSelect1">
+        <option value="">Select</option>
+        <option *ngFor="let role of rolesList" [value]="role.code">{{role.value}}</option>
+      </select>
+    </div>
+  </div>
+  <div>
+    <div class="col-md-12" *ngFor="let key of veiwArray; let index = index;">
+      <div [ngSwitch]="key">
+        <div class="row" *ngSwitchCase="'fields'">
+          <app-component-panel [form]="formGroup" [fieldList]="createViewJSON[key]"></app-component-panel>
+        </div>
+        <app-accordion *ngSwitchCase="'accordions'" [panels]="createViewJSON[key]" [isAdmin]="false" [form]="formGroup">
+        </app-accordion>
+        <app-tabs *ngSwitchCase="'tabs'" [tabList]="createViewJSON[key]" [isAdmin]="false" [form]="formGroup"></app-tabs>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="col-md-12 button-padding float-right">
+  <button type="button" class="btn btn-primary float-right" *ngIf="showEdit" (click)="editView()">Edit</button>
+  <button type="button" class="btn btn-outline-secondary float-right" (click)="back()">{{ showEdit ? 'Cancel' :
+    'Back'}}</button>
+</div>
+<app-loader [showLoader]="showLoader"></app-loader>

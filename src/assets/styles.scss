@@ -1,0 +1,97 @@
+/* You can add global styles to this file, and also import other style files */
+@import './mixin.scss';
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome.scss";
+
+// body {
+//   padding: 20px;
+// }
+.label-font-size {
+    font-size: 0.8rem;
+}
+.error {
+    color: red;
+}
+
+.view-label {
+    padding-right: 10px;
+    font-weight: 600;
+}
+.mandatory-span {
+    color: red;
+    padding-left: 2px;
+    padding-right: 5px;
+}
+
+.pointer-cursor {
+    cursor: pointer;
+}
+
+.dynamicView-header {
+    background-color: #472F91 !important;
+}
+
+.btn.btn-primary {
+	background-color: #F57921;
+    color: #fff;
+    border-color: #F57921;
+    border-radius: 5px;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled):focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.btn-primary:focus {
+    background-color: #F57921;
+    border-color: #F57921;
+    box-shadow: none;
+}
+
+.dynamicViewTable {
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+    color: rgba(0,0,0,.87);
+}
+
+.dynamicViewTable th {
+    background-color: #977FD7;
+    border-color: #fff;
+    color: #fff;
+}
+
+.dynamicViewTable td {
+    border-bottom: 1px solid rgba(0,0,0,.12);
+}
+
+.dynamicViewTable thead th:first-of-type, .dynamicViewTable tbody td:first-of-type {
+    padding-left: 24px;
+}
+
+/* input styles */
+select, input {
+    outline: 0;
+    overflow: hidden;
+    padding: 5px 0px !important;
+    border: none !important;
+    border-bottom: 1px solid #472F91 !important;
+    border-radius: 0 !important;
+}
+.form-control:focus {
+    box-shadow: none;
+    border-bottom: 2px solid #472F91 !important;
+}
+.was-validated .form-control:invalid,
+.form-control.is-invalid, .was-validated
+.custom-select:invalid, .custom-select.is-invalid {
+    border-bottom: 2px solid #dc3545 !important;
+}
+
+.was-validated .form-control:invalid:focus,
+.form-control.is-invalid:focus,
+.was-validated .custom-select:invalid:focus,
+.custom-select.is-invalid:focus {
+    border-bottom: 2px solid #dc3545 !important;
+    box-shadow: none;
+}
+.error-message {
+    color: red;
+}

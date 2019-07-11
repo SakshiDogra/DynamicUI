@@ -1,0 +1,25 @@
+.wrapper {
+  .mt-20 {
+      margin-top: 20px;
+  }
+  .ml-20 {
+    margin-left: 20px;
+  }
+  .dropdown-menu {
+    padding: 10px;
+    a {
+      display: block;
+    }
+  }
+  .dropdown {
+    .btn {
+      width: 150px;
+    }
+  }
+}
+.padding-top {
+  padding-top: 15px;
+}
+.align-center {
+  text-align: right;
+}

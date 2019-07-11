@@ -1,0 +1,75 @@
+<div class="page-header header-border">
+  <h4>{{pageHeader}}</h4>
+</div>
+<form [formGroup]="formGroup">
+  <div class="row">
+    <div class="col-md-6 form-group">
+      <label for="exampleSelect1">Apps</label>
+      <select class="form-control" [ngClass]="{'is-invalid': isFieldValid('app')}" (change)="onAppChange()"
+        formControlName="app" id="exampleSelect1">
+        <option value="" disabled>Select</option>
+        <option *ngFor="let app of appsList" [value]="app.code">{{app.value}}</option>
+      </select>
+    </div>
+    <div class="col-md-6 form-group">
+      <label for="exampleSelect1">Role</label>
+      <select class="form-control" (change)="onAppChange()" [ngClass]="{'is-invalid': isFieldValid('role')}"
+        formControlName="role" id="exampleSelect1">
+        <option value="" disabled>Select</option>
+        <option *ngFor="let role of rolesList" [value]="role.code">{{role.value}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 form-group">
+      <label for="sel1">View Name:</label>
+      <input type="text" class="form-control" [ngClass]="{'is-invalid': isFieldValid('viewName')}"
+        formControlName="viewName" id="index" placeholder="View Name">
+    </div>
+  </div>
+  <div class="accordion-container" *ngIf="appDependentList.length > 0">
+    <div class="panel" [class.panel-open]="!isAppPanelOpen">
+      <div class="panel-header d-flex position-relative" (click)="isAppPanelOpen = !isAppPanelOpen" tabindex="0">
+        <h3 class="panel-label float-left mb-0">{{getDefaultAppName()}}</h3>
+        <i class="panel-icon fa" aria-label="arrow icon" [class.fa-angle-down]="isAppPanelOpen"
+          [class.fa-angle-up]="!isAppPanelOpen"></i>
+      </div>
+      <div class="panel-content" [class.d-none]="isAppPanelOpen">
+        <div class="row" formGroupName="defaultFormGroup">
+          <div class="col-md-6 form-group" *ngFor="let appItem of appDependentList">
+            <label for="exampleSelect1">{{appItem.fieldName}}</label>
+            <select [formControlName]="appItem.fieldId" class="form-control" (change)="onDependentListChange()"
+              [id]="appItem.fieldId">
+              <option value="" disabled>Select</option>
+              <option *ngFor="let app of appItem.keyValues" [value]="app.code">{{app.value}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="col-md-12" *ngFor="let key of veiwArray; let index = index;">
+      <div [ngSwitch]="key">
+        <div *ngSwitchCase="'fields'">
+          <div *ngIf="createViewJSON[key].length">
+            <app-field-list [fieldList]="createViewJSON[key]" [form]="formGroup"></app-field-list>
+          </div>
+        </div>
+        <div *ngSwitchCase="'accordions'">
+          <app-accordion [panels]="createViewJSON[key]" [isAdmin]="true" (deletePanel)="deletePanel($event, key)"
+            [form]="formGroup"></app-accordion>
+        </div>
+        <div *ngSwitchCase="'tabs'">
+          <app-tabs [tabList]="createViewJSON[key]" [isAdmin]="true" [form]="formGroup"></app-tabs>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="col-md-12 button-padding float-right">
+  <button type="button" class="btn btn-primary float-right" (click)="cancel()">Cancel</button>
+  <button type="button" class="btn btn-primary float-right" (click)="preview()">Preview</button>
+  <button type="button" class="btn btn-primary float-right" (click)="saveView()">Save</button>
+</div>
+<app-loader [showLoader]="showLoader"></app-loader>

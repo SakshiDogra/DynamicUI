@@ -1,0 +1,238 @@
+// box-shadow
+// ==========
+//
+// Provides the vendor prefixes required for adding box shadow
+//
+// @param $type [string] : This is the type of box shadow. E.g.: Inline
+// @param $hLength [string] : This is the horizontal length of the shadox. E.g.: 2px or 0
+// @param $vLength [string] : This is the vertical length of the shadox. E.g.: 2px or 0
+// @param $blur [string] : This is the blur radius of the shadox. E.g.: 2px or 0
+// @param $color [hexadecimal string] : This is the hexadecimal color code
+//
+// @example scss - Usage
+// .foo {
+//    @include box-shadow(inline, 2px, 2px, 2px, 2px, #444444);
+// }
+//
+@mixin box-shadow($type, $hLength, $vLength, $blur, $spread, $color) {
+  -webkit-box-shadow: $type $hLength $vLength $blur $spread $color;
+  -moz-box-shadow: $type $hLength $vLength $blur $spread $color;
+  box-shadow: $type $hLength $vLength $blur $spread $color;
+}
+
+// placeholder
+// ===========
+//
+// Provides the vendor prefixes required for styling a text field placeholder text
+//
+// @param $color [hexadecimal string] : This is the hexadecimal color code
+//
+// @example scss - Usage
+// .foo {
+//    @include placeholder(#444444);
+// }
+//
+@mixin placeholder($color) {
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+
+  &:-moz-placeholder {
+    color: $color;
+    opacity: 1;
+  }
+
+  &::-moz-placeholder {
+    color: $color;
+    opacity: 1;
+  }
+
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+}
+
+// ellipsis
+// ===========
+//
+// Provides the styles required to show ellipsis when the value length is more that the field length
+//
+// @example scss - Usage
+// .foo {
+//    @include ellipsis();
+// }
+//
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// vertical
+// ===========
+//
+// Rotates the text by 90 degrees. i.e. Vertical
+//
+// @example scss - Usage
+// .foo {
+//    @include vertical();
+// }
+//
+@mixin vertical {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+// vertical-align-middle
+//=======================
+//
+//Vertically aligns the element to the middle vertically w.r.t the parent
+//
+//@example scss - Usage
+//.foo {
+//  @include vertical-align-middle();
+// }
+//
+@mixin vertical-align-middle {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+// transform
+//=======================
+//
+//Applies the transforms as required, with the correct browser prefixes
+//
+//@example scss - Usage
+//.foo {
+//  @include transform();
+// }
+//
+@mixin transform($value) {
+  -webkit-transform: $value;
+  -ms-transform: $value;
+  transform: $value;
+}
+
+// border-radius-mixin
+//=======================
+//
+// mixin to apply the border radius for cross browser
+//
+//@example scss - Usage
+//.foo {
+//  @include border-radius-mixin(2px);
+// }
+//
+@mixin border-radius($radius) {
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+}
+
+// no pointer events mixin
+//=======================
+//
+// mixin to prevent click events on the selected element
+//
+//@example scss - Usage
+//.foo {
+//  @include no-pointer-events();
+// }
+//
+@mixin no-pointer-events {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+// no default password toggle icon mixin
+//=======================
+//
+// mixin to hide default input password toggle icon in IE
+//
+//@example scss - Usage
+//.foo {
+//  @include no-default-password-toggle-icon();
+// }
+//
+@mixin no-default-password-toggle-icon {
+  &::-ms-clear,
+  &::-ms-reveal {
+    display: none;
+  }
+}
+
+// transition mixin
+//=======================
+//
+// mixin to apply transitions between states of an element
+//
+// Format: @include transition(transition1, transition2, ..... transitionN);
+//
+//@example scss - Usage
+//.single-transition {
+//  @include transition(font-size 0.2ms ease-in-out);  // args for each transition - {property} {duration} {timingFn}
+// }
+//.multiple-transition {
+//  @include transition(font-size 0.2ms ease-in-out, all 0.2ms ease);  // args for each transition - {property} {duration} {timingFn}
+// }
+//
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+// animation
+//=======================
+//
+//Applies the animation as required, with the correct browser prefixes
+//
+//@example scss - Usage
+//.foo {
+//  @include animation($spin $time $figure);
+// }
+//
+@mixin animation($spin, $time, $figure) {
+  -webkit-animation: $spin $time $figure;
+  animation: $spin $time $figure;
+}
+
+// animation-iteration-count
+//=======================
+//
+//Applies the animation iteration count as required, with the correct browser prefixes
+//
+//@example scss - Usage
+//.foo {
+//  @include animation($value);
+// }
+//
+@mixin animation-iteration-count($value) {
+  -webkit-animation-iteration-count: $value;
+  animation-iteration-count: $value;
+}
+
+// background-cover
+//=======================
+//
+//Applies the full size background, with the correct browser prefixes
+//
+//@example scss - Usage
+//.foo {
+//  @include background-cover($value);
+// }
+//
+@mixin background-cover($value) {
+  -webkit-background-size: $value;
+  -moz-background-size: $value;
+  -o-background-size: $value;
+  background-size: $value;
+}
+

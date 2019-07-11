@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 login-form">
+        <form [formGroup]="loginForm">
+            <div class="row form-group">
+                <!-- <label for="userName">User Name : </label> -->
+                <input type="text" class="form-control" formControlName="userName" id="userName" required>
+                <span class="floating-label">User Name</span>
+            </div>
+            <div class="row form-group">
+                <!-- <label for="password">Password : </label> -->
+                <input type="password" class="form-control" formControlName="password" id="password" required>
+                <span class="floating-label">Password</span>
+            </div>
+            <div class="row form-group">
+                <label for="role">Role :</label>
+                <div class="clearfix padding-left-10">
+                    <label class="container1 radio-inline radio-padding " *ngFor="let option of roles">
+                        <span>{{option.value}}</span>
+                        <input type="radio" name="optradio" (change)="onChange(option.code)" [value]="option.code">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary float-right" [disabled]="!disable()" (click)="login()">Login</button>
+            </div>
+        </form>
+    </div>
+</div>

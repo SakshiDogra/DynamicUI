@@ -1,0 +1,59 @@
+@import '../../assets/styles.scss';
+
+.accordion-container {
+  margin: 20px 0;
+  .panel {
+    box-shadow: 1px 1px 8px #999;
+    margin-bottom: 10px;
+    
+    .panel-header {
+      cursor: pointer;
+      outline: none;  
+      padding-bottom: 10px;
+      .panel-label {
+        padding: 20px 20px;
+        font-weight: normal;
+        font-size: 16px;
+        color: #737373;
+      }
+
+      .panel-icon {
+        @include vertical-align-middle();
+
+        font-size: 28px;
+        color: #737373;
+        position: absolute;
+        right: 0;
+        padding-right: 30px;
+      }
+
+      .panel-content-padding {
+        padding-top: 10px;
+      }
+      .panel-content-delete-padding {
+        padding-top: 15px;
+        .material-icons {
+          color: #472F91;
+        }
+      }
+    }
+
+    .panel-content {
+      border-top: none;
+      padding: 20px 30px;
+      height: auto;
+      background-color: #ffffff;
+    } 
+    
+    &.panel-open {
+        .panel-header {
+            border: none;
+            background: #fff;
+            .panel-label {
+                color: #444444;
+                font-weight: bold;
+            }
+        }
+    }
+  }
+}

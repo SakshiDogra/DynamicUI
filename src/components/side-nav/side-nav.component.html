@@ -1,0 +1,12 @@
+<nav class="sidebar sidenav-section">
+  <ul class="nav nav-pills flex-column">
+    <li class="nav-item">
+      <a class="nav-link active"> {{ sideNavData.title }}
+        <span class="sr-only">(current)</span>
+      </a>
+    </li>
+    <li class="nav-item" *ngFor="let item of sideNavData.navItems">
+      <a class="nav-link" [ngClass]="{'active': item.active}" (click)="navigateTo(item)"> {{ item.item }}</a>
+    </li>
+  </ul>
+</nav>

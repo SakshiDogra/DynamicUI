@@ -1,0 +1,114 @@
+<div class="container mt-20">
+  <div class="mt-20 col-sm-12">
+    <div class="row">
+    </div>
+    <div class="row">
+      <div class="col-md-5 form-group">
+        <!-- <label for="app">Apps</label> -->
+        <select class="form-control" id="app" [(ngModel)]="appId">
+          <option value="" disabled >Select App Type</option>
+          <option *ngFor="let app of appsList" [value]="app.code">{{app.value}}</option>
+        </select>
+      </div>
+      <div class="col-md-5 form-group">
+        <!-- <label for="role">Role</label> -->
+        <select class="form-control" id="role" [(ngModel)]="roleId">
+          <option value="" disabled >Select Role Type</option>
+          <option *ngFor="let role of rolesList" [value]="role.code">{{role.value}}</option>
+        </select>
+      </div>
+      <div class="col-md-2 padding-button">
+        <button type="button" class="btn btn-primary" (click)="search()">
+          <a>
+            <i class="material-icons">search</i>
+          </a>
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h3 class="text-dark padding-top">List of Views</h3>
+      </div>
+      <div class="col-md-6 float-right align-center margin-top">
+        <!-- <button class="btn btn-primary mt-20 margin-right" (click)="navigateTo('user')"> User View </button> -->
+        <button class="btn btn-primary mt-20" (click)="navigateTo()"> Create New View </button>
+      </div>
+    </div>
+    <div class="row">
+      <table class="mt-20 table dynamicViewTable">
+        <thead class="table-active">
+          <tr>
+            <th class="">App Name</th>
+            <th class="">Created By</th>
+            <th class="">Role Name</th>
+            <th class="">Config Name</th>
+            <th class="">Created Date</th>
+            <th class="">Preview</th>
+            <th class="">Copy</th>
+            <th class="">Edit</th>
+            <th class="">Delete</th>
+          </tr>
+        </thead>
+        <!-- <div style="padding-left: 2%" > -->
+        <tbody *ngIf="dashboardData.length === 0">
+          <tr>
+            <div style="padding: 3%">No records are tagged to this search createrria</div>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr *ngFor="let view of pagedResults; let index = index;">
+            <td class="">{{view.appName}}</td>
+            <td class="">{{view.createdBy}}</td>
+            <td class="">{{view.userRole}}</td>
+            <td class="">{{view.configName}}</td>
+            <td class="">{{dateConverstion(view.creationDate)}}</td>
+            <td class="">
+              <a (click)="preview(view, index)">
+                <i class="material-icons">search</i>
+              </a>
+            </td>
+            <td class="">
+              <a (click)="copyView(view, index)">
+                <i class="material-icons">file_copy</i>
+              </a>
+            </td>
+            <td class="">
+              <a (click)="editView(view, index)">
+                <i class="material-icons">edit</i>
+              </a>
+            </td>
+            <td class="">
+              <a (click)="delete(view)">
+                <i class="material-icons">delete</i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="float-right" *ngIf="dashboardData.length > 0">
+        <app-pagination [dataLength]="dashboardData.length" (pageChange)="pageChange($event)" [pageSize]="pageSize">
+        </app-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loader [showLoader]="showLoader"></app-loader>
+<app-modal [showLoader]="confirmationModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete {{deleteConfig?.configName}} Config</h5>
+        <button type="button" class="close" data-dismiss="modal" (click)="confirmationModal = false" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the config?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="confirmDelete()">Yes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="confirmationModal = false">No</button>
+      </div>
+    </div>
+  </div>
+</app-modal>

@@ -1,0 +1,124 @@
+.login-form {
+    padding: 40px;
+    width:30%;
+    margin-top: 5%;
+    min-height: 400px;
+    margin-bottom: 20px;
+    border-radius: 0;
+    border: 1px solid #CCC;
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+
+    
+.container1 {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.form-group {
+    position: relative;
+}
+
+.form-control:focus {
+    border-color: #fff;
+    box-shadow: none;
+    border-bottom: 2px solid #472F91;
+    border-radius: 0;
+}
+input[type="text"], input[type="password"] {
+    min-height: 50px;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid #472F91;
+    padding: 0;
+}
+.floating-label {
+    position: absolute;
+    pointer-events: none;
+    top: 15px;
+    left: 0;
+    padding-top: calc(var(--input-padding-y) / 3);
+    padding-bottom: calc(var(--input-padding-y) / 3);
+    font-size: 16px;
+    color: #788791;
+    transition: 0.2s ease all;
+}
+input:not(:focus):valid ~ .floating-label, input:focus ~ .floating-label{
+    bottom: 10px;
+    left: 0;
+    top: 0;
+    padding-top: calc(var(--input-padding-y) / 3);
+    padding-bottom: calc(var(--input-padding-y) / 3);
+    font-size: 12px;
+    opacity: 1;
+    color: #472F91;
+}
+
+/* Hide the browser's default radio button */
+.container1 input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,.12);
+}
+
+/* On mouse-over, add a grey background color */
+.container1:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container1 input:checked ~ .checkmark {
+    background-color: #472F91;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container1 input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container1 .checkmark:after {
+    top: 5px;
+    left: 5px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+    background: white;
+}
+
+.radio-inline {
+    float: left;
+}
+.radio-padding {
+    padding-left: 25px;
+    padding-right: 15px;
+}
+.padding-left-10 {
+    padding-left: 10px;
+}
+}

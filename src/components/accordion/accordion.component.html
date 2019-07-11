@@ -1,0 +1,85 @@
+<div *ngIf="isAdmin">
+  <div [formGroup]="form" class="accordion-container" *ngFor="let panel of panels; let index = index">
+    <div class="panel" [class.panel-open]="!panel.isOpen">
+      <div class="panel-header d-flex position-relative col-md-12" tabindex="0">
+        <div class="col-md-4 panel-content-padding">
+          <input class="form-control" [ngClass]="{'is-invalid': isFieldValid(panel.sectionId)}"
+            (change)="onChange(index)" type="text" [formControlName]="panel.sectionId" />
+        </div>
+        <div class="col-md-3 panel-content-padding">
+          <app-toggle-switch [label]="'Is Collapsible'" [panel]="panel" [fieldName]="'collapsable'"
+            (togglePanelChange)="toggleChange($event, index, panel, true)" [type]="'accordion'"></app-toggle-switch>
+        </div>
+        <div class="col-md-3 panel-content-padding">
+          <app-toggle-switch [label]="'Default Collapsed'" [panel]="panel" [fieldName]="'collapsed'"
+            [disable]="!panel.collapsable" (togglePanelChange)="toggleChange($event, index, panel, false)"
+            [type]="'accordion'"></app-toggle-switch>
+        </div>
+        <div class="col-md-1 panel-content-delete-padding">
+          <a (click)="delete(panel, index)"><i class="material-icons">delete</i></a>
+        </div>
+        <div class="col-md-1">
+          <i class="panel-icon fa" aria-label="arrow icon"
+            (keyup.enter)="(panel.collapsable ? panel.isOpen = !panel.isOpen : '')"
+            (click)="(panel.collapsable ? panel.isOpen = !panel.isOpen : '')" [class.fa-angle-down]="panel.isOpen"
+            [class.fa-angle-up]="!panel.isOpen"></i>
+        </div>
+      </div>
+      <div class="panel-content" [class.d-none]="panel.isOpen">
+        <div class="row" *ngIf="panel.fields && panel.sectionId">
+          <app-field-list [fieldList]="panel.fields" [form]="form"></app-field-list>
+        </div>
+        <!-- <div *ngIf="panel.tabs">
+          <app-tabs [tabList]="panel.tabs" [form]="form" [isAdmin]="isAdmin" [form]="form"></app-tabs>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!isAdmin">
+  <div [formGroup]="form" class="accordion-container" *ngFor="let panel of panels; let index = index">
+    <div *ngIf="panel.sectionId">
+      <div class="panel" [class.panel-open]="!panel.isOpen">
+        <div class="panel-header d-flex position-relative" (keyup.enter)="panel.collapsable" (click)="panel.collapsable"
+          tabindex="0">
+          <h3 class="panel-label float-left mb-0">{{panel.sectionName}}</h3>
+          <i class="panel-icon fa" aria-label="arrow icon" (keyup.enter)="(panel.isOpen = !panel.isOpen)"
+            (click)="(panel.isOpen = !panel.isOpen)" [class.fa-angle-down]="panel.isOpen"
+            [class.fa-angle-up]="!panel.isOpen"></i>
+        </div>
+        <div class="panel-content" [class.d-none]="panel.isOpen">
+          <div class="row" *ngIf="panel.fields && panel.sectionId">
+            <div class="col-md-12">
+              <app-component-panel [fieldList]="panel.fields" [answers]="answers" [isAccordion]="'true'"
+                [isAdmin]="false" [form]="form"></app-component-panel>
+            </div>
+          </div>
+          <!-- <div *ngIf="panel.tabs">
+            <app-tabs [tabList]="panel.tabs" [form]="form" [isAdmin]="isAdmin" [form]="form"></app-tabs>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-modal [showLoader]="confirmationModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete {{deleteSection?.sectionName}} section</h5>
+        <button type="button" class="close" data-dismiss="modal" (click)="confirmationModal = false" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the section?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="confirmDeletePanel()">Yes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+          (click)="confirmationModal = false">No</button>
+      </div>
+    </div>
+  </div>
+</app-modal>

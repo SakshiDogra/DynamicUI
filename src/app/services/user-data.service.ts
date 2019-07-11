@@ -19,7 +19,7 @@ const headers = new HttpHeaders()
 })
 
 export class UserDataService {
-  url = 'https://shielded-shelf-31028.herokuapp.com/';
+  url = 'http://localhost:4000/';
   configDetails: ConfigDetails = {
     viewDetails: null,
     viewType: ''
